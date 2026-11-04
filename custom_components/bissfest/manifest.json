@@ -1,0 +1,13 @@
+{
+  "domain": "bissfest",
+  "name": "Bissfest",
+  "codeowners": ["@Skarhand"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/Skarhand/bissfest-homeassistant",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/Skarhand/bissfest-homeassistant/issues",
+  "requirements": [],
+  "version": "2.1.0"
+}
