@@ -210,3 +210,9 @@ cd tests && ../.venv/bin/python -m pytest -q
 ```
 
 Die API selbst ist in der Bissfest-App dokumentiert (`docs/home-assistant-api.md`).
+
+## Lizenz
+
+Freie Software unter der **GNU AGPL-3.0** ([LICENSE](LICENSE)). Name, Logo und App-Icon sind davon ausgenommen; Details in [NOTICE.md](NOTICE.md).
+
+© 2026 Sebastian Frie
