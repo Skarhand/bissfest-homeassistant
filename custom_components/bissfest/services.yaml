@@ -6,7 +6,7 @@ add_water:
           integration: bissfest
     ml:
       required: true
-      example: 250
+      example: 200
       selector:
         number:
           min: -3000

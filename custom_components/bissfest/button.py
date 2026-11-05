@@ -16,7 +16,7 @@ from .entity import BissfestEntity, remove_stale_entities
 
 PARALLEL_UPDATES = 1
 
-WATER_STEP_ML = 250
+WATER_STEP_ML = 200
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -33,8 +33,8 @@ def _enabled(kind: str) -> Callable[[dict[str, Any]], bool]:
 
 BUTTONS: tuple[BissfestButtonDescription, ...] = (
     BissfestButtonDescription(
-        key="add_water_250",
-        translation_key="add_water_250",
+        key="add_water_200",
+        translation_key="add_water_200",
         press_fn=lambda c: c.add_water(WATER_STEP_ML),
     ),
     *(

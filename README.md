@@ -24,7 +24,7 @@ Voraussetzungen:
 
 ## Token erzeugen
 
-1. Bissfest öffnen → **Einstellungen → Home Assistant**.
+1. Bissfest öffnen → **Einstellungen → Extras → Home Assistant**.
 2. **Token erzeugen** antippen und einen Namen vergeben (z. B. „Home Assistant“).
 3. Den angezeigten Token kopieren – er beginnt mit `bf_` und wird nur einmal angezeigt.
 
@@ -73,7 +73,7 @@ Schaltest du in Bissfest Kaffee/Tee ein oder aus oder änderst die Zahl der Mahl
 
 | Button | Aktion |
 |---|---|
-| Wasser +250 ml | 250 ml Wasser eintragen |
+| Wasser +200 ml | 200 ml Wasser eintragen |
 | Kaffee Tasse / Kaffee Pott | Kaffee eintragen (Tasse 150 ml, Pott 250 ml) |
 | Tee Tasse / Tee Pott | Tee eintragen |
 | Letzten Kaffee / Tee zurücknehmen | letzten Eintrag des Tages löschen |
@@ -103,7 +103,7 @@ data:
 
 ### Wasser-Erinnerung am Nachmittag
 
-Erinnert um 15 Uhr per Handy-Benachrichtigung, wenn noch nicht die Hälfte des Wasserziels erreicht ist. Mit einer Aktion in der Benachrichtigung trägst du direkt 250 ml ein.
+Erinnert um 15 Uhr per Handy-Benachrichtigung, wenn noch nicht die Hälfte des Wasserziels erreicht ist. Mit einer Aktion in der Benachrichtigung trägst du direkt 200 ml ein.
 
 ```yaml
 alias: Bissfest – Wasser-Erinnerung
@@ -123,8 +123,8 @@ actions:
         {{ state_attr('sensor.bissfest_sebastian_wasser', 'goal_ml') }} ml.
       data:
         actions:
-          - action: BISSFEST_WATER_250
-            title: +250 ml
+          - action: BISSFEST_WATER_200
+            title: +200 ml
 mode: single
 ```
 
@@ -134,11 +134,11 @@ triggers:
   - trigger: event
     event_type: mobile_app_notification_action
     event_data:
-      action: BISSFEST_WATER_250
+      action: BISSFEST_WATER_200
 actions:
   - action: bissfest.add_water
     data:
-      ml: 250
+      ml: 200
 mode: queued
 ```
 

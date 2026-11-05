@@ -118,10 +118,10 @@ async def test_button_press_updates_state(hass: HomeAssistant, aioclient_mock, s
     await _setup(hass, config_entry)
 
     await hass.services.async_call(
-        "button", "press", {"entity_id": "button.bissfest_sebastian_water_250_ml"}, blocking=True
+        "button", "press", {"entity_id": "button.bissfest_sebastian_water_200_ml"}, blocking=True
     )
     call = [c for c in aioclient_mock.mock_calls if c[0] == "POST"][0]
-    assert call[2] == {"ml": 250}
+    assert call[2] == {"ml": 200}
     assert hass.states.get("sensor.bissfest_sebastian_water").state == "1750"
 
 

@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Bissfest verbinden",
-        "description": "Den API-Token erzeugst du in Bissfest unter Einstellungen → Home Assistant.",
+        "description": "Den API-Token erzeugst du in Bissfest unter Einstellungen → Extras → Home Assistant.",
         "data": {
           "url": "Bissfest-URL",
           "token": "API-Token"
@@ -15,7 +15,7 @@
       },
       "reauth_confirm": {
         "title": "Bissfest erneut anmelden",
-        "description": "Der Token für {url} ist ungültig oder wurde widerrufen. Erzeuge in Bissfest unter Einstellungen → Home Assistant einen neuen Token.",
+        "description": "Der Token für {url} ist ungültig oder wurde widerrufen. Erzeuge in Bissfest unter Einstellungen → Extras → Home Assistant einen neuen Token.",
         "data": {
           "token": "API-Token"
         }
@@ -222,8 +222,8 @@
       }
     },
     "button": {
-      "add_water_250": {
-        "name": "Wasser +250 ml"
+      "add_water_200": {
+        "name": "Wasser +200 ml"
       },
       "add_coffee_cup": {
         "name": "Kaffee Tasse"

@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Connect Bissfest",
-        "description": "Create the API token in Bissfest under Settings → Home Assistant.",
+        "description": "Create the API token in Bissfest under Settings → Extras → Home Assistant.",
         "data": {
           "url": "Bissfest URL",
           "token": "API-Token"
@@ -15,7 +15,7 @@
       },
       "reauth_confirm": {
         "title": "Re-authenticate Bissfest",
-        "description": "The token for {url} is invalid or has been revoked. Create a new one in Bissfest under Settings → Home Assistant.",
+        "description": "The token for {url} is invalid or has been revoked. Create a new one in Bissfest under Settings → Extras → Home Assistant.",
         "data": {
           "token": "API-Token"
         }
@@ -222,8 +222,8 @@
       }
     },
     "button": {
-      "add_water_250": {
-        "name": "Water +250 ml"
+      "add_water_200": {
+        "name": "Water +200 ml"
       },
       "add_coffee_cup": {
         "name": "Coffee cup"

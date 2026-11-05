@@ -34,7 +34,7 @@
       "meal_other": {"default": "mdi:silverware"}
     },
     "button": {
-      "add_water_250": {"default": "mdi:cup-water"},
+      "add_water_200": {"default": "mdi:cup-water"},
       "add_coffee_cup": {"default": "mdi:coffee"},
       "add_coffee_mug": {"default": "mdi:coffee-outline"},
       "add_tea_cup": {"default": "mdi:tea"},
