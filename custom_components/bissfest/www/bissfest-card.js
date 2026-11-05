@@ -60,10 +60,10 @@ const MAX_GLASSES = 20;
 const STYLE = `
   :host { display: block; height: 100%; }
   ha-card { height: 100%; box-sizing: border-box; padding: 14px; display: flex; flex-direction: column;
-    justify-content: center; gap: 10px; color: var(--primary-text-color); }
+    justify-content: center; gap: 10px; color: var(--primary-text-color); container-type: inline-size; }
   .title { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--secondary-text-color); }
   .title ha-icon { color: var(--c); --mdc-icon-size: 20px; }
-  .head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 8px; }
   .big { font-size: 26px; font-weight: 500; line-height: 1.2; }
   .value { font-size: 15px; font-weight: 500; white-space: nowrap; }
   .sub { font-size: 13px; color: var(--secondary-text-color); }
@@ -97,6 +97,14 @@ const STYLE = `
     justify-content: center; }
   .ring b { font-size: 20px; font-weight: 500; }
   .msg { font-size: 14px; color: var(--secondary-text-color); text-align: center; padding: 12px 0; }
+  @container (max-width: 190px) {
+    .big { font-size: 20px; white-space: nowrap; }
+    .side { gap: 8px; }
+    .side svg { width: 42px; height: auto; flex: none; }
+    .row { gap: 4px; }
+    button { font-size: 12px; padding: 6px 2px; }
+    button.icon { flex: 0 0 30px; }
+  }
 `;
 
 class BissfestCard extends HTMLElement {
