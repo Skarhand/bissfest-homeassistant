@@ -225,6 +225,9 @@
       "add_water_200": {
         "name": "Water +200 ml"
       },
+      "add_water_500": {
+        "name": "Water +500 ml"
+      },
       "add_coffee_cup": {
         "name": "Coffee cup"
       },

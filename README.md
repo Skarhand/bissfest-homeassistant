@@ -74,11 +74,43 @@ Schaltest du in Bissfest Kaffee/Tee ein oder aus oder änderst die Zahl der Mahl
 | Button | Aktion |
 |---|---|
 | Wasser +200 ml | 200 ml Wasser eintragen |
+| Wasser +500 ml | 500 ml Wasser eintragen |
 | Kaffee Tasse / Kaffee Pott | Kaffee eintragen (Tasse 150 ml, Pott 250 ml) |
 | Tee Tasse / Tee Pott | Tee eintragen |
 | Letzten Kaffee / Tee zurücknehmen | letzten Eintrag des Tages löschen |
 
 Kaffee- und Tee-Buttons gibt es nur, wenn das jeweilige Extra in Bissfest eingeschaltet ist.
+
+## Dashboard-Karten
+
+Die Integration bringt drei eigene Karten mit, die sich automatisch laden. Eine Dashboard-Ressource musst du nicht anlegen. Nach dem Update Home Assistant neu starten und die Seite im Browser neu laden (in der Companion-App ggf. den Frontend-Cache leeren).
+
+Du findest sie im Dashboard unter **Karte hinzufügen** als „Bissfest Wasser“, „Bissfest Kaffee“ und „Bissfest Tee“. Variante, Titel und Konto stellst du direkt im Karten-Editor ein. Die Karten finden ihre Sensoren selbst, auch wenn du Entitäten umbenennst.
+
+| Karte | `variant` | Darstellung |
+|---|---|---|
+| `custom:bissfest-water-card` | `glass` (Standard) | Füllendes Glas mit Menge und Prozent |
+| | `ring` | Fortschrittsring |
+| | `grid` | Raster aus Gläsern, Glasgröße über `glass_ml` (Standard 200) |
+| | `compact` | Flache Karte mit Balken |
+| `custom:bissfest-coffee-card` | `row` (Standard) | Reihe aus Tassen und Pötten |
+| | `ring` | Koffein-Ring, Richtwert über `caffeine_limit` (Standard 400 mg), darüber wird der Ring rot |
+| | `counter` | Zwei Zähler zum Antippen |
+| | `compact` | Flache Karte |
+| `custom:bissfest-tea-card` | `row` (Standard) | Reihe aus Tassen und Pötten |
+| | `mug` | Großer Becher, ab 1 l voll |
+| | `counter` | Zwei Zähler zum Antippen |
+| | `compact` | Flache Karte |
+
+Die Wasserkarten haben die Tasten +200 ml, +500 ml und −200 ml, die Kaffee- und Teekarten Tasse, Pott und Rückgängig. Tippst du auf den Wert, öffnet sich der Verlauf des Sensors.
+
+```yaml
+type: custom:bissfest-water-card
+variant: grid
+glass_ml: 250
+```
+
+Bei mehreren Bissfest-Konten wählst du das Konto im Editor aus (Feld `device`). Ohne Angabe nimmt die Karte das erste Konto, bei dem die Sensoren vorhanden sind.
 
 ## Services
 

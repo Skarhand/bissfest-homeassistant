@@ -54,6 +54,17 @@ def auto_enable_custom_integrations(enable_custom_integrations):
     yield
 
 
+@pytest.fixture(autouse=True)
+def mock_frontend(request, hass):
+    """http und frontend gelten als geladen, die Karten werden nur in test_frontend.py registriert."""
+    hass.config.components.update({"http", "frontend"})
+    if "test_frontend" in request.node.nodeid:
+        yield
+        return
+    with patch("custom_components.bissfest.async_register_cards", AsyncMock()):
+        yield
+
+
 @pytest.fixture
 def status() -> dict[str, Any]:
     return copy.deepcopy(STATUS)

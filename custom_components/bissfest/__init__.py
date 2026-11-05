@@ -11,6 +11,7 @@ from homeassistant.helpers.typing import ConfigType
 from .api import BissfestApiClient
 from .const import DOMAIN
 from .coordinator import BissfestConfigEntry, BissfestCoordinator, layout_signature
+from .frontend import async_register_cards
 from .services import async_setup_services
 
 PLATFORMS: list[Platform] = [Platform.BUTTON, Platform.SENSOR]
@@ -19,8 +20,9 @@ CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
-    """Services einmalig registrieren."""
+    """Services und Dashboard-Karten einmalig registrieren."""
     async_setup_services(hass)
+    await async_register_cards(hass)
     return True
 
 

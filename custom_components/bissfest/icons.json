@@ -35,6 +35,7 @@
     },
     "button": {
       "add_water_200": {"default": "mdi:cup-water"},
+      "add_water_500": {"default": "mdi:bottle-soda-outline"},
       "add_coffee_cup": {"default": "mdi:coffee"},
       "add_coffee_mug": {"default": "mdi:coffee-outline"},
       "add_tea_cup": {"default": "mdi:tea"},

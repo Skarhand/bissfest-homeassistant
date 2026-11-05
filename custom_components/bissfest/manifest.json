@@ -5,11 +5,14 @@
     "@Skarhand"
   ],
   "config_flow": true,
-  "dependencies": [],
+  "dependencies": [
+    "frontend",
+    "http"
+  ],
   "documentation": "https://github.com/Skarhand/bissfest-homeassistant",
   "integration_type": "service",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/Skarhand/bissfest-homeassistant/issues",
   "requirements": [],
-  "version": "2.1.3"
+  "version": "2.2.0"
 }
