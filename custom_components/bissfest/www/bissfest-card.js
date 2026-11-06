@@ -9,7 +9,7 @@ const TEXT = {
   de: {
     water: "Wasser", coffee: "Kaffee", tea: "Tee",
     of: "von", glasses: "Gläsern", glass_hint: "1 Glas = {ml} ml",
-    cup: "Tasse", cups: "Tassen", mug: "Pott", mugs: "Pötte",
+    cup: "Tasse", cups: "Tassen", mug: "Pott", mugs: "Pötte", espresso: "Espresso", espressos: "Espressi",
     caffeine: "Koffein", nothing: "Heute noch nichts",
     undo: "Letzten Eintrag zurücknehmen", minus: "{ml} ml abziehen",
     missing_water: "Keine Bissfest-Wassersensoren gefunden.",
@@ -26,7 +26,7 @@ const TEXT = {
   en: {
     water: "Water", coffee: "Coffee", tea: "Tea",
     of: "of", glasses: "glasses", glass_hint: "1 glass = {ml} ml",
-    cup: "cup", cups: "cups", mug: "mug", mugs: "mugs",
+    cup: "cup", cups: "cups", mug: "mug", mugs: "mugs", espresso: "espresso", espressos: "espressos",
     caffeine: "caffeine", nothing: "Nothing yet today",
     undo: "Undo last entry", minus: "Subtract {ml} ml",
     missing_water: "No Bissfest water sensors found.",
@@ -79,6 +79,7 @@ const STYLE = `
   button:focus-visible { outline: 2px solid var(--c); outline-offset: 1px; }
   button:disabled { opacity: .5; cursor: default; }
   button.icon { flex: 0 0 40px; --mdc-icon-size: 18px; }
+  .icons ha-icon.espresso { --mdc-icon-size: 14px; }
   .head button.icon { flex: 0 0 36px; min-height: 32px; }
   button.tile { padding: 8px; line-height: 1.3; background: color-mix(in srgb, var(--c) 12%, transparent); }
   button.tile .big { display: block; }
@@ -336,32 +337,41 @@ class BissfestDrinkCard extends BissfestCard {
   _buttons(undo = true) {
     const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
     return `<div class="row">${this._add("cup", cap(this._t("cup")))}${this._add("mug", cap(this._t("mug")))}${
-      undo ? this._undo() : ""}</div>`;
+      this._hasEspresso() ? this._add("espresso", cap(this._t("espresso"))) : ""}${undo ? this._undo() : ""}</div>`;
   }
 
-  _summary(cups, mugs, ml, mg) {
-    return `${this._fmt(cups)} ${this._word(cups, "cup", "cups")} · ${this._fmt(mugs)} ${this._word(mugs, "mug", "mugs")}
+  // Nur beim Kaffee und nur, wenn der Bissfest-Server Espresso schon kennt
+  _hasEspresso() {
+    return !!this._ids().coffee_espressos;
+  }
+
+  _summary(cups, mugs, ml, mg, espressos) {
+    return `${this._fmt(cups)} ${this._word(cups, "cup", "cups")} · ${this._fmt(mugs)} ${this._word(mugs, "mug", "mugs")}${
+      espressos ? ` · ${this._fmt(espressos)} ${this._word(espressos, "espresso", "espressos")}` : ""}
       · ${this._fmt(ml)} ml · ${this._fmt(mg)} mg ${this._t("caffeine")}`;
   }
 
-  _icons(cups, mugs, icon) {
-    const total = (cups || 0) + (mugs || 0);
+  _icons(cups, mugs, icon, espressos = 0) {
+    const total = (cups || 0) + (mugs || 0) + (espressos || 0);
     if (!total) return `<div class="icons"><span class="sub">${this._t("nothing")}</span></div>`;
     const shownCups = Math.min(cups || 0, MAX_ICONS);
     const shownMugs = Math.min(mugs || 0, MAX_ICONS - shownCups);
-    const rest = total - shownCups - shownMugs;
+    const shownEspressos = Math.min(espressos || 0, MAX_ICONS - shownCups - shownMugs);
+    const rest = total - shownCups - shownMugs - shownEspressos;
     return `<div class="icons">${
       `<ha-icon class="small" icon="${icon}"></ha-icon>`.repeat(shownCups)}${
       `<ha-icon class="large" icon="${icon}"></ha-icon>`.repeat(shownMugs)}${
+      `<ha-icon class="espresso" icon="${icon}"></ha-icon>`.repeat(shownEspressos)}${
       rest > 0 ? `<span class="sub">+${rest}</span>` : ""}</div>`;
   }
 
-  _counter(cups, mugs, ml, mg, icon, label) {
+  _counter(cups, mugs, ml, mg, icon, label, espressos) {
     const tile = (size, count, one, many) => this._add(size,
       `<span class="big">${this._fmt(count)}</span><span class="sub">${this._word(count, one, many)} +</span>`,
       'class="tile"');
     return `<div class="head">${this._title(icon, label)}${this._undo()}</div>
-      <div class="row">${tile("cup", cups, "cup", "cups")}${tile("mug", mugs, "mug", "mugs")}</div>
+      <div class="row">${tile("cup", cups, "cup", "cups")}${tile("mug", mugs, "mug", "mugs")}${
+        this._hasEspresso() ? tile("espresso", espressos, "espresso", "espressos") : ""}</div>
       <div class="sub">${this._fmt(ml)} ml · ${this._fmt(mg)} mg ${this._t("caffeine")}</div>`;
   }
 
@@ -376,6 +386,7 @@ class BissfestDrinkCard extends BissfestCard {
     if (!ids[`${kind}_ml`]) return `<div class="msg">${this._t(`missing_${kind}`)}</div>`;
     const cups = this._num(`${kind}_cups`);
     const mugs = this._num(`${kind}_mugs`);
+    const espressos = this._hasEspresso() ? this._num("coffee_espressos") : 0;
     const ml = this._num(`${kind}_ml`);
     const mg = this._num(`${kind}_caffeine`);
     const label = this._t(kind);
@@ -384,15 +395,15 @@ class BissfestDrinkCard extends BissfestCard {
 
     switch (this._config.variant) {
       case "counter":
-        return this._counter(cups, mugs, ml, mg, icon, label);
+        return this._counter(cups, mugs, ml, mg, icon, label, espressos);
       case "compact":
         return this._compact(ml, mg, icon, label, more);
       case "ring":
       case "mug":
         return name + this._special(ml, mg, ids);
       default:
-        return `${name}<div data-more="${more}">${this._icons(cups, mugs, icon)}</div>
-          <div class="sub">${this._summary(cups, mugs, ml, mg)}</div>${this._buttons()}`;
+        return `${name}<div data-more="${more}">${this._icons(cups, mugs, icon, espressos)}</div>
+          <div class="sub">${this._summary(cups, mugs, ml, mg, espressos)}</div>${this._buttons()}`;
     }
   }
 }
@@ -403,7 +414,7 @@ class BissfestCoffeeCard extends BissfestDrinkCard {
   static color = "#ba7517";
   static variants = ["row", "ring", "counter", "compact"];
   static defaults = { caffeine_limit: 400 };
-  static sensorKeys = ["coffee_cups", "coffee_mugs", "coffee_ml", "coffee_caffeine"];
+  static sensorKeys = ["coffee_cups", "coffee_mugs", "coffee_espressos", "coffee_ml", "coffee_caffeine"];
 
   _special(ml, mg, ids) {
     const limit = Math.max(Number(this._config.caffeine_limit) || 400, 1);

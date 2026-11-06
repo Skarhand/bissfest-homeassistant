@@ -4,7 +4,7 @@ Custom-Integration, die deine [Bissfest](https://bissfest.facgooder.de)-Abnehm-A
 
 Voraussetzungen:
 
-- Bissfest **2.1.0 oder neuer** (bringt die REST-API `/api/v1` mit)
+- Bissfest **2.1.0 oder neuer** (bringt die REST-API `/api/v1` mit), für Espresso **2.12.0 oder neuer**
 - Home Assistant **2024.11 oder neuer**
 
 ## Installation
@@ -75,7 +75,7 @@ Schaltest du in Bissfest Kaffee/Tee ein oder aus oder änderst die Zahl der Mahl
 |---|---|
 | Wasser +200 ml | 200 ml Wasser eintragen |
 | Wasser +500 ml | 500 ml Wasser eintragen |
-| Kaffee Tasse / Kaffee Pott | Kaffee eintragen (Tasse 150 ml, Pott 250 ml) |
+| Kaffee Tasse / Kaffee Pott / Kaffee Espresso | Kaffee eintragen (Tasse 150 ml, Pott 250 ml, Espresso 30 ml) |
 | Tee Tasse / Tee Pott | Tee eintragen |
 | Letzten Kaffee / Tee zurücknehmen | letzten Eintrag des Tages löschen |
 
@@ -93,9 +93,9 @@ Du findest sie im Dashboard unter **Karte hinzufügen** als „Bissfest Wasser�
 | | `ring` | Fortschrittsring |
 | | `grid` | Raster aus Gläsern, Glasgröße über `glass_ml` (Standard 200) |
 | | `compact` | Flache Karte mit Balken |
-| `custom:bissfest-coffee-card` | `row` (Standard) | Reihe aus Tassen und Pötten |
+| `custom:bissfest-coffee-card` | `row` (Standard) | Reihe aus Tassen, Pötten und Espressi |
 | | `ring` | Koffein-Ring, Richtwert über `caffeine_limit` (Standard 400 mg), darüber wird der Ring rot |
-| | `counter` | Zwei Zähler zum Antippen |
+| | `counter` | Drei Zähler zum Antippen |
 | | `compact` | Flache Karte |
 | `custom:bissfest-tea-card` | `row` (Standard) | Reihe aus Tassen und Pötten |
 | | `mug` | Großer Becher, ab 1 l voll |
@@ -120,7 +120,7 @@ Alle Services haben das optionale Feld `config_entry_id`. Es ist nur nötig, wen
 |---|---|
 | `bissfest.add_water` | `ml` (−3000 bis 3000, negativ = abziehen) |
 | `bissfest.log_weight` | `kg` (20 bis 400), optional `date` (Standard heute) |
-| `bissfest.add_drink` | `kind` (`coffee`/`tea`), `size` (`cup`/`mug`) |
+| `bissfest.add_drink` | `kind` (`coffee`/`tea`), `size` (`cup`/`mug`, bei Kaffee auch `espresso`) |
 | `bissfest.undo_drink` | `kind` (`coffee`/`tea`) |
 
 Beispiel:

@@ -18,4 +18,4 @@ async def test_register_cards(hass: HomeAssistant) -> None:
     assert config.url_path == CARD_URL
     assert CARD_PATH.is_file()
     assert config.path == str(CARD_PATH)
-    add_js.assert_called_once_with(hass, f"{CARD_URL}?v=2.2.1")
+    add_js.assert_called_once_with(hass, f"{CARD_URL}?v=2.3.0")

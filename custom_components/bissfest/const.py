@@ -14,7 +14,7 @@ MAX_SCAN_INTERVAL: Final = 60
 TOKEN_PREFIX: Final = "bf_"
 
 DRINK_KINDS: Final = ("coffee", "tea")
-DRINK_SIZES: Final = ("cup", "mug")
+DRINK_SIZES: Final = ("cup", "mug", "espresso")
 
 # Feste Mahlzeitennamen aus Bissfest → stabiler Schlüssel (unique_id + Übersetzung)
 MEAL_KEYS: Final = {

@@ -42,7 +42,7 @@ STATUS: dict[str, Any] = {
     ],
     "water": {"ml": 1500, "goal_ml": 2000, "percent": 75},
     "weight": {"today_kg": 77.2, "latest_kg": 77.2, "latest_date": "2026-11-04", "target_kg": 75.0, "change_30d_kg": -2.8},
-    "coffee": {"enabled": True, "cups": 1, "mugs": 2, "ml": 650, "caffeine_mg": 390},
+    "coffee": {"enabled": True, "cups": 1, "mugs": 2, "espressos": 1, "ml": 680, "caffeine_mg": 455},
     "tea": {"enabled": False, "cups": 0, "mugs": 0, "ml": 0, "caffeine_mg": 0},
     "caffeine_total_mg": 390,
 }

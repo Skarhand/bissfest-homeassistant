@@ -162,6 +162,13 @@ SENSORS: tuple[BissfestSensorDescription, ...] = (
         value_fn=lambda d: d.get("caffeine_total_mg"),
     ),
     *_drink("coffee"),
+    BissfestSensorDescription(
+        key="coffee_espressos",
+        translation_key="coffee_espressos",
+        state_class=SensorStateClass.MEASUREMENT,
+        value_fn=lambda d: _get(d, "coffee", "espressos"),
+        exists_fn=lambda d: bool(_get(d, "coffee", "enabled")) and "espressos" in (d.get("coffee") or {}),
+    ),
     *_drink("tea"),
 )
 

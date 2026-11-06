@@ -50,6 +50,12 @@ BUTTONS: tuple[BissfestButtonDescription, ...] = (
         for kind in ("coffee", "tea")
         for size in ("cup", "mug")
     ),
+    BissfestButtonDescription(
+        key="add_coffee_espresso",
+        translation_key="add_coffee_espresso",
+        press_fn=lambda c: c.add_drink("coffee", "espresso"),
+        exists_fn=lambda d: bool((d.get("coffee") or {}).get("enabled")) and "espressos" in d["coffee"],
+    ),
     *(
         BissfestButtonDescription(
             key=f"undo_{kind}",

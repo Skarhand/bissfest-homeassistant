@@ -99,4 +99,5 @@ def layout_signature(data: dict[str, Any]) -> tuple:
     meals = tuple(m.get("name") for m in data.get("meals") or [])
     coffee = bool((data.get("coffee") or {}).get("enabled"))
     tea = bool((data.get("tea") or {}).get("enabled"))
-    return (meals, coffee, tea)
+    espresso = "espressos" in (data.get("coffee") or {})  # ältere Bissfest-Server kennen keinen Espresso
+    return (meals, coffee, tea, espresso)

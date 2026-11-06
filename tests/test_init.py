@@ -53,7 +53,8 @@ async def test_sensors(hass: HomeAssistant, aioclient_mock, status, config_entry
         "total_caffeine": "390",
         "coffee_cups": "1",
         "coffee_mugs": "2",
-        "coffee_volume": "650",
+        "coffee_espressos": "1",
+        "coffee_volume": "680",
         "breakfast_calories": "456",
         "lunch_calories": "600",
         "dinner_calories": "264",
@@ -75,6 +76,7 @@ async def test_sensors(hass: HomeAssistant, aioclient_mock, status, config_entry
     assert hass.states.get(prefix + "tea_cups") is None
     assert hass.states.get("button.bissfest_sebastian_tea_cup") is None
     assert hass.states.get("button.bissfest_sebastian_coffee_cup") is not None
+    assert hass.states.get("button.bissfest_sebastian_coffee_espresso") is not None
     assert hass.states.get("button.bissfest_sebastian_undo_last_coffee") is not None
 
 
@@ -134,6 +136,28 @@ async def test_water_500_button(hass: HomeAssistant, aioclient_mock, status, con
         "button", "press", {"entity_id": "button.bissfest_sebastian_water_500_ml"}, blocking=True
     )
     assert [c[2] for c in aioclient_mock.mock_calls if c[0] == "POST"] == [{"ml": 500}]
+
+
+async def test_espresso_button(hass: HomeAssistant, aioclient_mock, status, config_entry) -> None:
+    aioclient_mock.get(f"{API}/status", json=status)
+    aioclient_mock.post(f"{API}/drink", json=status)
+    await _setup(hass, config_entry)
+
+    await hass.services.async_call(
+        "button", "press", {"entity_id": "button.bissfest_sebastian_coffee_espresso"}, blocking=True
+    )
+    call = [c for c in aioclient_mock.mock_calls if c[0] == "POST"][0]
+    assert call[2] == {"kind": "coffee", "size": "espresso"}
+
+
+async def test_old_server_without_espresso(hass: HomeAssistant, aioclient_mock, status, config_entry) -> None:
+    del status["coffee"]["espressos"]
+    aioclient_mock.get(f"{API}/status", json=status)
+    await _setup(hass, config_entry)
+
+    assert hass.states.get("button.bissfest_sebastian_coffee_cup") is not None
+    assert hass.states.get("button.bissfest_sebastian_coffee_espresso") is None
+    assert hass.states.get("sensor.bissfest_sebastian_coffee_espressos") is None
 
 
 async def test_services(hass: HomeAssistant, aioclient_mock, status, config_entry) -> None:

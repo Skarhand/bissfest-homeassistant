@@ -114,6 +114,9 @@
       "coffee_mugs": {
         "name": "Kaffee Pötte"
       },
+      "coffee_espressos": {
+        "name": "Kaffee Espressi"
+      },
       "coffee_ml": {
         "name": "Kaffee Menge"
       },
@@ -234,6 +237,9 @@
       "add_coffee_mug": {
         "name": "Kaffee Pott"
       },
+      "add_coffee_espresso": {
+        "name": "Kaffee Espresso"
+      },
       "add_tea_cup": {
         "name": "Tee Tasse"
       },
@@ -281,7 +287,8 @@
     "size": {
       "options": {
         "cup": "Tasse (150 ml)",
-        "mug": "Pott (250 ml)"
+        "mug": "Pott (250 ml)",
+        "espresso": "Espresso (30 ml, nur Kaffee)"
       }
     }
   },
@@ -332,7 +339,7 @@
         },
         "size": {
           "name": "Größe",
-          "description": "Tasse (150 ml) oder Pott (250 ml)."
+          "description": "Tasse (150 ml), Pott (250 ml) oder Espresso (30 ml, nur Kaffee)."
         }
       }
     },

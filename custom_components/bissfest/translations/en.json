@@ -114,6 +114,9 @@
       "coffee_mugs": {
         "name": "Coffee mugs"
       },
+      "coffee_espressos": {
+        "name": "Coffee espressos"
+      },
       "coffee_ml": {
         "name": "Coffee volume"
       },
@@ -234,6 +237,9 @@
       "add_coffee_mug": {
         "name": "Coffee mug"
       },
+      "add_coffee_espresso": {
+        "name": "Coffee espresso"
+      },
       "add_tea_cup": {
         "name": "Tea cup"
       },
@@ -281,7 +287,8 @@
     "size": {
       "options": {
         "cup": "Cup (150 ml)",
-        "mug": "Mug (250 ml)"
+        "mug": "Mug (250 ml)",
+        "espresso": "Espresso (30 ml, coffee only)"
       }
     }
   },
@@ -332,7 +339,7 @@
         },
         "size": {
           "name": "Size",
-          "description": "Cup (150 ml) or mug (250 ml)."
+          "description": "Cup (150 ml), mug (250 ml) or espresso (30 ml, coffee only)."
         }
       }
     },

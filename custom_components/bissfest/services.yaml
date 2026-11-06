@@ -58,6 +58,7 @@ add_drink:
           options:
             - cup
             - mug
+            - espresso
           translation_key: size
 
 undo_drink:
